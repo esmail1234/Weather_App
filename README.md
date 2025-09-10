@@ -1,16 +1,27 @@
-# weather_app
+Weather App 🌤️
 
-A new Flutter project.
+A simple Flutter app that includes:
 
-## Getting Started
+🌦️ Current Weather info (temperature, humidity, wind speed)
 
-This project is a starting point for a Flutter application.
+📍 Weather forecast for upcoming days
 
-A few resources to get you started if this is your first Flutter project:
+🌐 Search by city or GPS location
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+👨‍💻 Developer Info
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This app was originally developed by:
+
+Esmail Mohamed
+GitHub: esmail1234
+First commit: [9 - 10 - 2025]
+
+All core features (current weather, forecast, search) were built in the first version.
+
+🔐 Notes
+This project is shared for learning and practical purposes.
+Any reuse or modifications must include credit to the original developer.
+Contributions are welcome with respect to original authorship.
+
+🤲 Final Note
+May this app help users plan their day better and make weather info easily accessible.
