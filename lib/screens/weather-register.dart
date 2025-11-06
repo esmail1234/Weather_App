@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:weather_app/screens/weather-home.dart';
 import 'package:weather_app/widgets/custom_text_field.dart';
