@@ -4,7 +4,7 @@ import 'package:weather_app/models/weather_model.dart';
 import 'dart:async';
 
 class CustomAppbar extends StatefulWidget {
-  final Function(WeatherModel)? onWeatherUpdated; // أضف ده
+  final Function(WeatherModel)? onWeatherUpdated;  
   const CustomAppbar({super.key, this.onWeatherUpdated});
 
   @override
@@ -25,15 +25,14 @@ class _CustomAppbarState extends State<CustomAppbar> {
     super.initState();
     _updateDateTime(); // أول تحديث
     Timer.periodic(const Duration(seconds: 1), (timer) {
-      _updateDateTime(); // تحديث كل ثانية
+      _updateDateTime();  
     });
   }
 
   void _updateDateTime() {
     final now = DateTime.now();
     setState(() {
-      // تنسيق الوقت والتاريخ
-      currentTime =
+       currentTime =
           "${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}";
       currentDate = "${now.day}/${now.month}/${now.year}";
     });
@@ -44,8 +43,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // الصف الأول: المدينة أو مربع البحث + زر البحث
-        Row(
+         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             isSearchMode
@@ -72,13 +70,11 @@ class _CustomAppbarState extends State<CustomAppbar> {
                         });
                         _searchController.clear();
 
-                        // جيب الطقس الجديد
                         final weather = await _weatherService.getWeather(value);
                         if (weather != null) {
-                          // أرسل البيانات للشاشة الرئيسية (هنستخدم callback أو notifier)
                           widget.onWeatherUpdated?.call(
                             weather,
-                          ); // هنضيف الـ callback ده
+                          );
                         }
                         debugPrint("تم البحث عن: $cityName");
                       } else {
@@ -118,7 +114,6 @@ class _CustomAppbarState extends State<CustomAppbar> {
 
         const SizedBox(height: 5),
 
-        // الصف الثاني: التاريخ والوقت
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

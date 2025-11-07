@@ -18,13 +18,13 @@ class WeatherHomeScreen extends StatefulWidget {
 }
 
 class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
-  WeatherModel? _currentWeather; // البيانات الحالية
+  WeatherModel? _currentWeather;  
   final WeatherService _weatherService = WeatherService();
 
   @override
   void initState() {
     super.initState();
-    _loadInitialWeather(); // جيب طقس القاهرة أول ما يفتح
+    _loadInitialWeather();  
   }
 
   Future<void> _loadInitialWeather() async {
@@ -45,17 +45,15 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // 🔹 Appbar مع خاصية البحث
-                CustomAppbar(
+                 CustomAppbar(
                   onWeatherUpdated: (weather) {
                     setState(() => _currentWeather = weather);
                   },
                 ),
-        
+
                 const SizedBox(height: 30),
-        
-                // 🔹 عرض الطقس الديناميكي
-                Center(
+
+                 Center(
                   child: Column(
                     children: [
                       Text(
@@ -80,26 +78,20 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
                     ],
                   ),
                 ),
-        
+
                 const SizedBox(height: 30),
-        
-                // 🔹 معلومات إضافية (ديناميكية)
-                _currentWeather != null
+
+                 _currentWeather != null
                     ? CustomBoxInfo(weather: _currentWeather!)
                     : const CustomBoxInfo(),
-        
-                const SizedBox(height: 30),
-        
-                // 🔹 رسم بياني
-                TemperatureGaugeWrapper(
-  weather: _currentWeather,
-),
-        
-                const SizedBox(height: 20),
-        
-                // 🔹 الأيام القادمة
-                WeatherTips(weather: _currentWeather),
 
+                const SizedBox(height: 30),
+
+                 TemperatureGaugeWrapper(weather: _currentWeather),
+
+                const SizedBox(height: 20),
+
+                 WeatherTips(weather: _currentWeather),
               ],
             ),
           ),
@@ -108,8 +100,7 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
     );
   }
 
-  // 🔹 دالة لتحديد الأيقونة المناسبة حسب حالة الطقس
-  IconData _getWeatherIcon(String iconCode) {
+   IconData _getWeatherIcon(String iconCode) {
     switch (iconCode[0]) {
       case '01':
         return Icons.wb_sunny;
