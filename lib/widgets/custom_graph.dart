@@ -1,83 +1,70 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
+import 'package:weather_app/models/weather_model.dart';
 
-class CustomGraph extends StatefulWidget {
-  const CustomGraph({super.key});
+class TemperatureGaugeWrapper extends StatelessWidget {
+  final WeatherModel? weather;
+  const TemperatureGaugeWrapper({super.key, this.weather});
 
-  @override
-  State<CustomGraph> createState() => _CustomGraphState();
-}
-
-class _CustomGraphState extends State<CustomGraph> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    double temperature = weather?.temperature ?? 0;
+
+    return Center(
       child: Container(
-        width: double.infinity,
+        width: 200,
         height: 200,
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(30),
-        ),
-        padding: const EdgeInsets.all(16),
-        child: LineChart(
-          LineChartData(
-            gridData: FlGridData(show: false),
-            titlesData: FlTitlesData(
-              leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-              rightTitles: AxisTitles(
-                sideTitles: SideTitles(showTitles: false),
-              ),
-              topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-              bottomTitles: AxisTitles(
-                sideTitles: SideTitles(
-                  showTitles: true,
-                  getTitlesWidget: (value, meta) {
-                    switch (value.toInt()) {
-                      case 0:
-                        return const Text("9 AM");
-                      case 2:
-                        return const Text("12 PM");
-                      case 4:
-                        return const Text("3 PM");
-                      case 6:
-                        return const Text("6 PM");
-                      case 8:
-                        return const Text("9 PM");
-                      case 10:
-                        return const Text("12 AM");
-                      case 12:
-                        return const Text("3 AM");
-                      default:
-                        return const Text("");
-                    }
-                  },
-                ),
-              ),
-            ),
-            borderData: FlBorderData(show: false),
-            lineBarsData: [
-              LineChartBarData(
-                isCurved: true,
-                color: Colors.blue,
-                barWidth: 3,
-                belowBarData: BarAreaData(
-                  show: true,
-                  // ignore: deprecated_member_use
-                  color: Colors.blue.withOpacity(0.2),
-                ),
-                spots: const [
-                  FlSpot(0, 19), // 9 AM
-                  FlSpot(2, 20), // 12 PM
-                  FlSpot(4, 18), // 3 PM
-                  FlSpot(6, 22), // 6 PM
-                  FlSpot(8, 17), // 9 PM
-                  FlSpot(10, 21), // 12 AM
-                  FlSpot(12, 20), // 3 AM
-                ],
-              ),
-            ],
+          borderRadius: BorderRadius.circular(20),
+          gradient: const LinearGradient(
+            colors: [Colors.orangeAccent, Colors.deepOrangeAccent],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
+          boxShadow: [
+            BoxShadow(
+              // ignore: deprecated_member_use
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            )
+          ],
+        ),
+        child: SfRadialGauge(
+          axes: <RadialAxis>[
+            RadialAxis(
+              minimum: -10,
+              maximum: 50,
+              ranges: <GaugeRange>[
+                GaugeRange(startValue: -10, endValue: 0, color: Colors.blue),
+                GaugeRange(startValue: 0, endValue: 25, color: Colors.green),
+                GaugeRange(startValue: 25, endValue: 50, color: Colors.red),
+              ],
+              pointers: <GaugePointer>[
+                NeedlePointer(
+                  value: temperature,
+                  enableAnimation: true,
+                  animationDuration: 1000,
+                  needleColor: Colors.black,
+                  knobStyle: const KnobStyle(color: Colors.black),
+                ),
+              ],
+              annotations: <GaugeAnnotation>[
+                GaugeAnnotation(
+                  widget: Text(
+                    '${temperature.toStringAsFixed(1)}°C',
+                    style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                  positionFactor: 0.8,
+                  angle: 90,
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
